@@ -1,0 +1,15 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block title %}
+<!--    {{product.slug}}-->
+{% endblock %}
+{% block content %}
+<h2>{{product.name}}</h2>
+    <div>
+        <img src="{% if product.image %} {{product.image.url}}{% else%}{% static 'img/no_image.webp'%}{% endif %}">
+        <p> {{product.name}}</p>
+        <p> {{product.price}}</p>
+    </div>
+
+
+{% endblock %}

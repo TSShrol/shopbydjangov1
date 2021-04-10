@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 
-# клас Category -> таблиця Category
+#модель Category -> таблиця shop_category
 from django.utils import timezone
 
 
@@ -13,12 +13,18 @@ class Category(models.Model):
 
     class Meta:
         ordering = ('name',)
+        verbose_name = 'category'
+        verbose_name_plural = 'categories'
         # db_table = 'category'
 
     def __str__(self):
         return self.name
 
-# клас Product -> таблиця Product
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse('shop:product_list_by_category', args=[self.slug])
+
+# клас Product -> таблиця shop_product
 class Product(models.Model):
     category = models.ForeignKey('Category', related_name='products', on_delete=models.CASCADE)
     name = models.CharField(max_length=200, db_index=True)
