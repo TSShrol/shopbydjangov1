@@ -46,5 +46,22 @@ class Cart(object):
             yield item
 
     def __len__(self):
+        # Повертаємо загальну кількість товарів в корзині
         count_product=[item['count_product'] for item in self.cart.values()]
         return sum(count_product)
+
+    def get_total_price(self):
+        #Підраховуємо суму вартості всіх товарів
+        list_price_all_product=[]
+        for item in self.cart.values():
+            list_price_all_product.append(Decimal(item['price']) * item['count_product'])
+
+        return sum(list_price_all_product)
+
+    def clear(self):
+        # Очищаємо корзину
+        del self.session[settings.CART_SESSION_ID]
+        self.save()
+
+    def __str__(self):
+        return str(self.cart)

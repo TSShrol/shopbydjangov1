@@ -22,24 +22,35 @@ category.name
     </ul>
 </div>
 <div class="col-md-9">
+    <div class="container">
+        <div class="row m-2">
+            {% for product in products %}
+            <div class="col-4">
+                 <div class="card m-2">
+                    <a href="{% url 'shop:product_detail' product.id %}">
+                        <img src="{% if product.image %} {{product.image.url}}{% else%}{% static 'img/no_image.png'%}{% endif %}"
+                             class="card-img-top" >
+                    </a>
 
-    {% for product in products %}
-    <div class="card" style="width: 18rem;">
-        <a href="{% url 'shop:product_detail' product.id %}">
-            <img src="{% if product.image %} {{product.image.url}}{% else%}{% static 'img/no_image.webp'%}{% endif %}"
-                 class="card-img-top">
-        </a>
-        <div class="card-body">
-            <a href="{% url 'shop:product_detail' product.id %}">
-                <h5 class="card-title"> {{product.name}}</h5>
-            </a>
-            <p class="card-text"> {{product.description}}</p>
-            <p class="card-text">{{product.price}} </p>
-            <a href="#" class="btn btn-primary">Додати</a>
+                    <div class="card-body">
+                        <a href="{% url 'shop:product_detail' product.id %}">
+                            <h5 class="card-title"> {{product.name}}</h5>
+                        </a>
+                        <p class="card-text"> {{product.description}}</p>
+                        <p class="card-text">{{product.price}} грн. </p>
+<!--                        <form action="{% url 'cart:cart_add' product.id %}" method="post">-->
+<!--    {{ cart_product_form }}-->
+<!--    {% csrf_token %}-->
+<!--    <input type="submit" value="Add to cart">-->
+<!--    </form>-->
+                        <a href="{% url 'cart:cart_add' product.id %}" class="btn btn-primary">Додати</a>
+                    </div>
+                 </div>
+            </div>
+
+            {% endfor %}
+
         </div>
     </div>
-    {% endfor %}
 </div>
-
-
 {% endblock %}
