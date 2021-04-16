@@ -3,6 +3,9 @@ from django.http import HttpResponse
 # Create your views here.
 from .models import Category,Product
 
+def about_shop(request):
+    return HttpResponse("Сторінка про магазин")
+
 def product_list(request,category_slug=None):
     category=None
     categories=Category.objects.all()

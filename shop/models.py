@@ -22,7 +22,7 @@ class Category(models.Model):
 
     def get_absolute_url(self):
         from django.urls import reverse
-        return reverse('shop:product_list_by_category', args=[self.slug])
+        return reverse('shop:product_list_by_category', args=[self.slug])#localhos:8000/slug
 
 # клас Product -> таблиця shop_product
 class Product(models.Model):
