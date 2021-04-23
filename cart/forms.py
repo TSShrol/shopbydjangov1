@@ -8,4 +8,3 @@ class CartAddProductForm(forms.Form):
     update_count_product = forms.BooleanField(required=False,
                                 initial=False,
                                 widget=forms.HiddenInput)
-

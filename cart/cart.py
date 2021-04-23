@@ -14,15 +14,18 @@ class Cart(object):
         self.cart=cart
 
     def add(self, product,count_product=1, update_count_product=False):
+        print(count_product)
         product_id=str(product.id)
         if product_id not in self.cart:
-            self.cart[product_id]={'count_product':1,'price':str(product.price)}
+            self.cart[product_id]={'count_product':0,'price':str(product.price)}
         if update_count_product:
             self.cart[product_id]['count_product']=count_product
         else:
             self.cart[product_id]['count_product']+=count_product
-            self.save()
+        self.save()
             # card= "{'1':{'count_product':'1','price':'123000'},'2':{'count_product':'3','price':'123000'}}"
+
+
 
     def save(self):
         self.session.modified=True

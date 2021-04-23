@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator
 from django.shortcuts import render,get_object_or_404
 from django.http import HttpResponse
 # Create your views here.
@@ -14,10 +15,21 @@ def product_list(request,category_slug=None):
     if category_slug:
         category=get_object_or_404(Category,slug=category_slug)
         products=products.filter(category=category)
+
+    paginator=Paginator(products,6)
+    if 'page' in request.GET:
+        page_num=request.GET['page']
+    else:
+        page_num=1
+    page = paginator.get_page(page_num)
+    print(page)
+    print(page.object_list)
+    print(page.number)
     return render(request,'shop/product/list.html',{
         'category':category,
         'categories':categories,
-        'products':products,
+        'products':page.object_list,
+        'page':page,
         })
 
 
